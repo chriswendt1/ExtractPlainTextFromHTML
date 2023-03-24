@@ -1,6 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using HtmlAgilityPack;
-using System.Xml;
 
 Console.WriteLine("Extract plain text from HTML.");
 

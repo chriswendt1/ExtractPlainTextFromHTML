@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using System.Reflection.Metadata;
 
 
 Console.WriteLine("Extract plain text from HTML.");
@@ -53,15 +54,15 @@ string ExtractText(string html)
 
     var chunks = new List<string>();
 
-    foreach (var item in doc.DocumentNode.DescendantsAndSelf())
+    //translatable elements are h1-h6, p, a, li, tr, td, th, label, button, alt attribute, 
+
+    foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//p|//h1|//h2|//h3|//h4|//h5|//h6|//li|//tr|//td|//th|//label|//a"))
     {
-        if (item.NodeType == HtmlNodeType.Text)
-        {
-            if (item.InnerText.Trim() != "")
+            if (node.InnerText.Trim() != "")
             {
-                chunks.Add(item.InnerText.Trim());
+                string toInsert = node.InnerText.Trim();
+                if (!chunks.Contains(toInsert)) chunks.Add(toInsert);
             }
-        }
     }
-    return String.Join(" ", chunks);
+    return String.Join("\r\n", chunks);
 }

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ExtractPlainTextFromHTML": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\RedCross\\SpanishSelection"
+    }
+  }
+}

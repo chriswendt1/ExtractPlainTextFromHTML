@@ -1,12 +1,13 @@
 ﻿using HtmlAgilityPack;
-using System.Reflection.Metadata;
-
 
 Console.WriteLine("Extract plain text from HTML.");
+
+var allChunks = new List<string>();
 if (args.Length > 0)
 {
     string rootPath = args[0];
     TraverseDirectory(rootPath, ProcessFile);
+    File.WriteAllText(rootPath+"\\allText.txt", String.Join("\r\n", allChunks));
     return 0;
 }
 else
@@ -62,7 +63,8 @@ string ExtractText(string html)
             {
                 string toInsert = node.InnerText.Trim();
                 if (!chunks.Contains(toInsert)) chunks.Add(toInsert);
-            }
+                if (!allChunks.Contains(toInsert)) allChunks.Add(toInsert);
+        }
     }
     return String.Join("\r\n", chunks);
 }
